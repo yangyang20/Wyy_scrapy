@@ -56,9 +56,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'wangyiyun.middlewares.WangyiyunDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+   'wangyiyun.custom_middlewares.CustormMiddlewares': 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -77,10 +77,10 @@ ITEM_PIPELINES = {
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay
 #初始下载延迟
-#AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_START_DELAY = 2
 # The maximum download delay to be set in case of high latencies
 #在高延迟情况下设置的最大下载延迟
-#AUTOTHROTTLE_MAX_DELAY = 60
+AUTOTHROTTLE_MAX_DELAY = 5
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
 #Scrapy应该并行发送的平均请求数每个远程服务器

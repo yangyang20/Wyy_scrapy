@@ -15,7 +15,7 @@ class WangyiyunItem(scrapy.Item):
     song_img = scrapy.Field()
 
     singer_id = scrapy.Field()
-    singer = scrapy.Field()
+    singer_name = scrapy.Field()
     singer_classify = scrapy.Field()
     singer_classify_id = scrapy.Field()
     singer_img = scrapy.Field()
