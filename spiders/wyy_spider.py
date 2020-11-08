@@ -1,6 +1,8 @@
 import scrapy
 import re
 from wangyiyun.items import WangyiyunItem
+from scrapy_selenium import SeleniumRequest
+
 
 class WangYiYunSpider(scrapy.Spider):
     name = "wyy_spider"
@@ -31,9 +33,10 @@ class WangYiYunSpider(scrapy.Spider):
             url = f"https://music.163.com/artist?id={singer_id}"
             # print("--------------------------")
 
-            request = scrapy.Request(url, callback=self.parse_singer,errback=self.err_singer, encoding="utf-8", meta={'flag': False,'dont_merge_cookies': True},
-                                     cb_kwargs={'singer':singer})
-            yield request
+            # request = scrapy.Request(url, callback=self.parse_singer,errback=self.err_singer, encoding="utf-8", meta={'flag': False,'dont_merge_cookies': True},
+            #                          cb_kwargs={'singer':singer})
+            yield SeleniumRequest(url=url,callback=self.parse_singer,errback=self.err_singer, encoding="utf-8", meta={'flag': False,'dont_merge_cookies': True},
+                                    cb_kwargs={'singer':singer})
         # print(list)
 
     def parse_singer(self,response,singer):
@@ -66,10 +69,12 @@ class WangYiYunSpider(scrapy.Spider):
             data['_id'] = song_id
             # print("------------")
 
-            request = scrapy.Request(url=url, callback=self.parse_song, encoding="utf-8", meta={'flag': False,'dont_merge_cookies':True},
+            # request = scrapy.Request(url=url, callback=self.parse_song, encoding="utf-8", meta={'flag': False,'dont_merge_cookies':True},
+            #                          errback=self.err_song,
+            #                cb_kwargs={'data':data})
+            yield SeleniumRequest(url=url, callback=self.parse_song, encoding="utf-8", meta={'flag': False,'dont_merge_cookies':True},
                                      errback=self.err_song,
                            cb_kwargs={'data':data})
-            yield request
 
 
     def parse_song(self,response,data):
@@ -86,12 +91,10 @@ class WangYiYunSpider(scrapy.Spider):
         yield data
 
     def err_song(self, failure):
-        print("999")
         print(failure.request.cb_kwargs['data'])
         # yield dict(
         #     main_url=failure.request.cb_kwargs['main_url'],
         # )
 
     def err_singer(self, failure):
-        print("888")
         print(failure.request.cb_kwargs['data'])

@@ -57,7 +57,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'wangyiyun.custom_middlewares.CustormMiddlewares': 543,
+   'scrapy_selenium.SeleniumMiddleware': 800,
+   # 'wangyiyun.custom_middlewares.CustormMiddlewares': 543,
 }
 
 # Enable or disable extensions
@@ -99,3 +100,9 @@ AUTOTHROTTLE_MAX_DELAY = 5
 
 MONGO_URI="localhost"
 MONGO_DATABASE="WangYiYun"
+
+from shutil import which
+
+SELENIUM_DRIVER_NAME = 'firefox'
+SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
+SELENIUM_BROWSER_EXECUTABLE_PATH = which('/home/yang/develop/python/geckodriver')

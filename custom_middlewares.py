@@ -1,6 +1,9 @@
 import scrapy
-from fake_useragent import UserAgent
-import fake_useragent
+from selenium import webdriver
+from scrapy.http import HtmlResponse
+
+from scrapy_selenium import SeleniumRequest
+
 class CustormMiddlewares(object):
     def __init__(self):
         self.proxies = []
@@ -11,13 +14,15 @@ class CustormMiddlewares(object):
         请求中间,是否使用代理
         '''
         if 'flag' in request.meta and not request.meta['flag']:
-            # print("111111111")
-            # ua = UserAgent().random
-            # print(ua)
-            # request.headers.setdefault('User-Agent',ua)
+            print(request)
+            '''
+            用selenium
+            '''
             return None
+            # return HtmlResponse(url=request.url, body=html_str, encoding='utf-8', request=request)
         # return None 表示用下载器下载。
         return None
+
 
 
 
