@@ -7,13 +7,13 @@ from scrapy_selenium import SeleniumRequest
 class WangYiYunSpider(scrapy.Spider):
     name = "wyy_spider"
 
-    start_urls = []
-    # start_urls = ["https://music.163.com/discover/artist/cat?id=1001"]
+    # start_urls = []
+    start_urls = ["https://music.163.com/discover/artist/cat?id=1001"]
 
-    def start_requests(self):
-        for i in ['1001','1002','1003','2001','2002','2003','6001','6003','7001','7002','7003']:
-            url = f"https://music.163.com/discover/artist/cat?id={i}"
-            yield scrapy.Request(url, callback=self.parse,encoding="utf-8",meta={'flag':False,'dont_merge_cookies': True})
+    # def start_requests(self):
+    #     for i in ['1001','1002','1003','2001','2002','2003','6001','6003','7001','7002','7003']:
+    #         url = f"https://music.163.com/discover/artist/cat?id={i}"
+    #         yield scrapy.Request(url, callback=self.parse,encoding="utf-8",meta={'flag':False,'dont_merge_cookies': True})
 
     def parse(self, response):
         # print(response.xpath('//html').get())
@@ -83,10 +83,9 @@ class WangYiYunSpider(scrapy.Spider):
         data['album']   = response.xpath('//div[@class="m-lycifo"]//p[@class="des s-fc4"][2]/a[@class="s-fc7"]/text()').get()
         # print(main_url)
         # print(data['singer'])
-        print(data['song_name'])
-        print(data['_id'])
-
-        # print(data)
+        # print(data['song_name'])
+        # print(data['_id'])
+        print(data)
         # print("----------")
         yield data
 

@@ -99,7 +99,7 @@ AUTOTHROTTLE_MAX_DELAY = 5
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 MONGO_URI="localhost"
-MONGO_DATABASE="WangYiYun"
+MONGO_DATABASE="WYY_MUSIC"
 
 from shutil import which
 
